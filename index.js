@@ -31,10 +31,11 @@ var dummyHelpers = {
 var Transpond = require("./transpond");
 var transpond = new Transpond().transpond;
 
+var serversList = [];
+var servers;
 module.exports = {
   start: function (params, rules) {
     var servers = params || {};
-    var serverList = [];
     for (var i in servers) {
       var server = http.createServer(function (req, res) {
         var port = req.headers.host.split(":")[1] || 80;
@@ -170,12 +171,23 @@ module.exports = {
         };
         pathHandle(realPath);
       });
-
+      console.log(i)
       server.listen(i);
 
       console.log("A server runing at port: " + i + ".");
 
-      serverList.push(server);
+      serversList.push(server);
+    }
+  },
+  stop: function (list) {
+    if (list) {
+
+    } else {
+      for (var i = serversList.length - 1; i >= 0; i--) {
+        serversList[i].close(function () {
+          console.log('stop listen ' + this._connectionKey);
+        })
+      };
     }
   }
 };

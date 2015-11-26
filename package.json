@@ -10,5 +10,13 @@
   },
   "dependencies": {
     "dummy-json": "~0.0.2"
+  },
+  "scripts": {
+    "test": "mocha --reporter min -w"
+  },
+  "devDependencies": {
+    "mocha": "^2.1.0",
+    "should": "^7.1.1",
+    "q": "^1.4.1"
   }
 }
